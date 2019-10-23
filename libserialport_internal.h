@@ -23,7 +23,7 @@
 
 
 #ifdef __linux__
-/* For timeradd, timersub, timercmp. */
+/* For timeradd, timersub, timercmp, realpath. */
 #define _BSD_SOURCE 1 /* for glibc < 2.19 */
 #define _DEFAULT_SOURCE 1 /* for glibc >= 2.20 */
 #endif
@@ -37,7 +37,6 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <limits.h>
 #ifdef _WIN32
 #include <windows.h>
 #include <tchar.h>
@@ -53,7 +52,6 @@
 #include <termios.h>
 #include <sys/ioctl.h>
 #include <sys/time.h>
-#include <limits.h>
 #include <poll.h>
 #endif
 #ifdef __APPLE__
@@ -85,7 +83,7 @@
 #endif
 
 /* Non-standard baudrates are not available everywhere. */
-#if (defined(HAVE_TERMIOS_SPEED) || defined(HAVE_TERMIOS2_SPEED)) && defined(HAVE_DECL_BOTHER)
+#if (defined(HAVE_TERMIOS_SPEED) || defined(HAVE_TERMIOS2_SPEED)) && HAVE_DECL_BOTHER
 #define USE_TERMIOS_SPEED
 #endif
 
